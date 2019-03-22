@@ -68,7 +68,7 @@ class DisplayContent extends React.Component {
         <SearchBar />
         <div className="row">
           <div className="col-3 border">
-            <SideBox />
+            <SideBox movies={this.props.movies} />
           </div>
           <div className="col-9 border">
             <div class="row">{render}</div>

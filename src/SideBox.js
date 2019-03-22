@@ -5,46 +5,49 @@ import "./index.css";
 import SearchBar from "./SearchBar";
 import ImageCard from "./ImageCard";
 import InputRange from "react-input-range";
-import FilterRange from "./FilterRange";
+import "react-input-range/lib/css/index.css";
 
 class SideBox extends React.Component {
+  constructor(props) {
+    super(props);
+    // this.handleChange = this.handleOnChange.bind(this);
+    this.state = {
+      yearValue: {
+        min: 2000,
+        max: 2019
+      },
+      ratingValue: {
+        min: 2000,
+        max: 2019
+      },
+      runtimeValue: {
+        min: 2000,
+        max: 2019
+      },
+      userYearValue: "",
+      userRatingValue: "",
+      usersRuntimeValue: ""
+    };
+  }
+
+  //   handleOnChange = e => {
+  //     this.setState({ yearValue: e.target.value });
+  //   };
+
   render() {
     return (
-      <FilterRange />
-      //   <div>
-      //     <div className="row">
-      //       <div className="dropdown">
-      //         <button
-      //           className="btn btn-secondary dropdown-toggle"
-      //           type="button"
-      //           id="dropdownMenuButton"
-      //           data-toggle="dropdown"
-      //           aria-haspopup="true"
-      //           aria-expanded="false"
-      //         >
-      //           Dropdown button
-      //         </button>
-      //         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      //           <div className="dropdown-item">Action</div>
-      //           <div className="dropdown-item">Action</div>
-      //           <div className="dropdown-item">Action</div>
-      //         </div>
-      //       </div>
-      //     </div>
-      //     <div className="row">
-      //       <label for="customRange1">Year</label>
-      //       <input type="range" class="custom-range" id="customRange1" />
-      //     </div>
-
-      //     <div className="row">
-      //       <label for="customRange1">Rating</label>
-      //       <input type="range" class="custom-range" id="customRange1" />
-      //     </div>
-      //     <div className="row">
-      //       <label for="customRange1">Runtime</label>
-      //       <input type="range" class="custom-range" id="customRange1" />
-      //     </div>
-      //   </div>
+      <div>
+        <p>Year</p>
+        <InputRange
+          draggableTrack
+          maxValue={2019}
+          minValue={1990}
+          onChange={value => this.setState({ yearValue: value })}
+          onChangeComplete={value => console.log(value)}
+          value={this.state.yearValue}
+        />
+        <button>SUBMIT</button>
+      </div>
     );
   }
 }
