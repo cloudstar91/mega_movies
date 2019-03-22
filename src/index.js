@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import SearchBar from "./SearchBar";
 import ImageCard from "./ImageCard";
 import DisplayContent from "./DisplayContent";
+import "./index.css";
 
 class MainApp extends React.Component {
   constructor() {
@@ -36,7 +36,6 @@ class MainApp extends React.Component {
     let data = await response.json();
 
     data = data.genres;
-    debugger;
     this.setState({ GenreList: data });
     //console.log(this.state.GenreList);
   };

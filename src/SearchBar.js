@@ -5,14 +5,14 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="input-group mb-3">
-        <input type="text" className="form-control" placeholder="" />
+        <input type="text" className="form-control" placeholder="Search" />
         <div className="input-group-prepend">
           <button
             className="btn btn-outline-secondary"
             type="button"
             id="button-addon1"
           >
-            Button
+            SEARCH
           </button>
         </div>
       </div>
