@@ -46,6 +46,7 @@ class DisplayContent extends React.Component {
         genre={this.extractGenre(genreList, item.genre_ids)}
         title={item.title}
         release={item.release_date}
+        poster={item.poster_path}
       />
     ));
     // this.extractGenre(this.props.genre, this.props.movies);
@@ -60,7 +61,9 @@ class DisplayContent extends React.Component {
           <div className="col-4 border">
             <SideBox />
           </div>
-          <div className="col-8 border">{render}</div>
+          <div className="col-8 border">
+            <div class="row">{render}</div>
+          </div>
         </div>
       </div>
     );
