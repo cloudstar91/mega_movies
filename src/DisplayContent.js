@@ -59,7 +59,19 @@ class DisplayContent extends React.Component {
     return genres;
   };
 
+  handleDropDown(a) {
+    a.dropdown();
+  }
+
   render() {
+    const genList = this.props.genre.map(item => {
+      return <option value="1">{item.name}</option>;
+    });
+
+    const Dropdown = () => (
+      <Dropdown placeholder="State" search selection options={genList} />
+    );
+
     // var GenreListObj = {};
 
     // this.props.genre.forEach(item => (GenreListObj[item.id] = item.name));
@@ -111,6 +123,18 @@ class DisplayContent extends React.Component {
 
         <div className="row">
           <div className="col-3 border">
+            <div className="row" />
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <label className="input-group-text" for="inputGroupSelect01">
+                  Genres
+                </label>
+              </div>
+              <select className="custom-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                {genList}
+              </select>
+            </div>
             <div>
               <p>Year</p>
               <InputRange

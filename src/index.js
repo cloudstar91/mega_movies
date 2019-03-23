@@ -29,6 +29,8 @@ class MainApp extends React.Component {
     this.API_KEY = `daf966ec004a4c2e755a29fc1605e0cb`;
     this.page = 1;
   }
+  debugger;
+
   goToPage = () => {
     this.page += 1;
     this.getGenreList();
@@ -93,7 +95,7 @@ class MainApp extends React.Component {
 
   render() {
     const movies =
-      this.state.SearchKeyword.length === ""
+      this.state.SearchKeyword.length === 0
         ? this.state.MovieList
         : this.state.FilteredMovieList;
     console.log(this.state.SearchKeyword);
