@@ -89,7 +89,26 @@ class DisplayContent extends React.Component {
     return (
       <div className="container" style={{ maxWidth: "1400px" }}>
         <h1> MEGA MOVIES</h1>
-        <SearchBar filter2={this.props.filter} />
+
+        <div className="input-group mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search"
+            name="filter"
+            onChange={this.props.filter}
+          />
+          <div className="input-group-prepend">
+            <button
+              className="btn btn-outline-secondary"
+              type="button"
+              id="button-addon1"
+            >
+              SEARCH
+            </button>
+          </div>
+        </div>
+
         <div className="row">
           <div className="col-3 border">
             <div>
@@ -108,31 +127,6 @@ class DisplayContent extends React.Component {
           <div className="col-9 border">
             <div class="row">{render}</div>
           </div>
-        </div>
-      </div>
-    );
-  }
-}
-
-class SearchBar extends React.Component {
-  render() {
-    return (
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Search"
-          name="filter"
-          onChange={this.props.filter2}
-        />
-        <div className="input-group-prepend">
-          <button
-            className="btn btn-outline-secondary"
-            type="button"
-            id="button-addon1"
-          >
-            SEARCH
-          </button>
         </div>
       </div>
     );

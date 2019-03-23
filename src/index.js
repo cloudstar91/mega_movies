@@ -7,12 +7,14 @@ import DisplayContent from "./DisplayContent";
 import "./index.css";
 
 class MainApp extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       MovieList: [],
       FilteredMovieList: [],
+      SearchKeyword: "",
+
       Movie: {
         Title: "",
         Genre: "",
@@ -66,27 +68,39 @@ class MainApp extends React.Component {
     this.getGenreList();
     this.getMovieList();
   }
-  //   componentWillMount() {
-  //     this.setState({ FilteredMovieList: this.state.MovieList });
-  //   }
+
   filterBySearch = e => {
-    debugger;
     var updatedList = this.state.MovieList;
     updatedList = updatedList.filter(function(item) {
-      if (
-        item.title.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1
-      ) {
-        return true;
+      const name = item.title || item.original_name || item.original_title;
+
+      if (name) {
+        if (name.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1) {
+          return true;
+        }
+        // item.title.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1 ||
+        // item.original_title
+        //   .toLowerCase()
+        //   .indexOf(e.target.value.toLowerCase()) !== -1 ||
+        // item.original_name
+        //   .toLowerCase()
+        //   .indexOf(e.target.value.toLowerCase()) !== -1
       }
     });
-    this.setState({ MovieList: updatedList });
+    this.setState({ SearchKeyword: e.target.value });
+    this.setState({ FilteredMovieList: updatedList });
   };
 
   render() {
+    const movies =
+      this.state.SearchKeyword.length === ""
+        ? this.state.MovieList
+        : this.state.FilteredMovieList;
+    console.log(this.state.SearchKeyword);
     return (
       <div>
         <DisplayContent
-          movies={this.state.MovieList}
+          movies={movies}
           genre={this.state.GenreList}
           filter={this.filterBySearch}
         />
