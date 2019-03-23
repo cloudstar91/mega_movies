@@ -2,8 +2,6 @@ import React from "react";
 
 import "./index.css";
 
-import SearchBar from "./SearchBar";
-import ImageCard from "./ImageCard";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 

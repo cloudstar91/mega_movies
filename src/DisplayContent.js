@@ -1,27 +1,51 @@
 import React from "react";
 
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
-import SearchBar from "./SearchBar";
-import SideBox from "./SideBox";
-import ImageCard from "./ImageCard";
+import InputRange from "react-input-range";
 import moment from "moment";
+import "react-input-range/lib/css/index.css";
 
 class DisplayContent extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      yearValue: {
+        min: 2000,
+        max: 2019
+      },
+      ratingValue: {
+        min: 2000,
+        max: 2019
+      },
+      runtimeValue: {
+        min: 2000,
+        max: 2019
+      },
+      userYearValue: "",
+      userRatingValue: "",
+      usersRuntimeValue: ""
+    };
   }
+
+  //   filterParentUserChange = value => {
+  //     this.props.movies.map(item => {
+  //       let momentObj = moment(item.release_date).format("YYYY-MM-DD");
+  //       momentObj = moment().year();
+
+  //     });
+  //   };
+
+  onYearChangeValue = value => {
+    this.setState({ yearValue: value });
+    // this.filterParentUserChange(value);
+  };
+
   componentDidMount() {}
 
   vlookupGenre = (genreList, ids) => {
-    // let genre_names = genreList.map(item => {
-    //   debugger;
-    //   ids.map(id => {
-    //     debugger;
-    //     if (id === item.id) return item.name;
-    //   });
-    // });
-
     var genres = [];
     for (var i = 0; i < ids.length; i++) {
       for (var j = 0; j < genreList.length; j++) {
@@ -49,7 +73,7 @@ class DisplayContent extends React.Component {
       momentObj = moment().year();
 
       return (
-        <ImageCard
+        <ResultDisplay
           genre={this.vlookupGenre(genreList, item.genre_ids)}
           title={item.title}
           release={momentObj}
@@ -65,10 +89,21 @@ class DisplayContent extends React.Component {
     return (
       <div className="container" style={{ maxWidth: "1400px" }}>
         <h1> MEGA MOVIES</h1>
-        <SearchBar />
+        <SearchBar filter2={this.props.filter} />
         <div className="row">
           <div className="col-3 border">
-            <SideBox movies={this.props.movies} />
+            <div>
+              <p>Year</p>
+              <InputRange
+                draggableTrack
+                maxValue={2019}
+                minValue={1990}
+                onChange={this.onYearChangeValue}
+                onChangeComplete={value => console.log(value)}
+                value={this.state.yearValue}
+              />
+              <button>SUBMIT</button>
+            </div>
           </div>
           <div className="col-9 border">
             <div class="row">{render}</div>
@@ -78,4 +113,99 @@ class DisplayContent extends React.Component {
     );
   }
 }
+
+class SearchBar extends React.Component {
+  render() {
+    return (
+      <div className="input-group mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search"
+          name="filter"
+          onChange={this.props.filter2}
+        />
+        <div className="input-group-prepend">
+          <button
+            className="btn btn-outline-secondary"
+            type="button"
+            id="button-addon1"
+          >
+            SEARCH
+          </button>
+        </div>
+      </div>
+    );
+  }
+}
+
+class ResultDisplay extends React.Component {
+  render() {
+    return (
+      <div className="col-4">
+        <div className="card-deck" style={{ height: "660px" }}>
+          <div className="card">
+            <img
+              src={"https://image.tmdb.org/t/p/w500/" + this.props.poster}
+              className="card-img-top"
+              alt="poster"
+            />
+            <div className="card-body">
+              <h5 className="card-title">{this.props.title}</h5>
+              <p className="card-text">{this.props.genre}</p>
+            </div>
+            <div className="card-footer d-flex justify-content-between">
+              <small className="text-muted">{this.props.release}</small>
+              <small className="text-muted">{this.props.rating}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+// class SideBox extends React.Component {
+//   //   handleOnChange = e => {
+//   //     this.setState({ yearValue: e.target.value });
+//   //   };
+//   constructor(props) {
+//     super(props);
+
+//     this.state = {
+//       yearValue: {
+//         min: 2000,
+//         max: 2019
+//       },
+//       ratingValue: {
+//         min: 2000,
+//         max: 2019
+//       },
+//       runtimeValue: {
+//         min: 2000,
+//         max: 2019
+//       },
+//       userYearValue: "",
+//       userRatingValue: "",
+//       usersRuntimeValue: ""
+//     };
+//   }
+//   render() {
+//     return (
+//       <div>
+//         <p>Year</p>
+//         <InputRange
+//           draggableTrack
+//           maxValue={2019}
+//           minValue={1990}
+//           onChange={value => this.setState({ yearValue: value })}
+//           onChangeComplete={value => console.log(value)}
+//           value={this.state.yearValue}
+//         />
+//         <button>SUBMIT</button>
+//       </div>
+//     );
+//   }
+// }
+
 export default DisplayContent;

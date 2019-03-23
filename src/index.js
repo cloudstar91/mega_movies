@@ -2,8 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import SearchBar from "./SearchBar";
-import ImageCard from "./ImageCard";
+
 import DisplayContent from "./DisplayContent";
 import "./index.css";
 
@@ -13,6 +12,7 @@ class MainApp extends React.Component {
 
     this.state = {
       MovieList: [],
+      FilteredMovieList: [],
       Movie: {
         Title: "",
         Genre: "",
@@ -27,6 +27,11 @@ class MainApp extends React.Component {
     this.API_KEY = `daf966ec004a4c2e755a29fc1605e0cb`;
     this.page = 1;
   }
+  goToPage = () => {
+    this.page += 1;
+    this.getGenreList();
+    this.getMovieList();
+  };
 
   getGenreList = async () => {
     let GenURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${
@@ -61,12 +66,31 @@ class MainApp extends React.Component {
     this.getGenreList();
     this.getMovieList();
   }
+  //   componentWillMount() {
+  //     this.setState({ FilteredMovieList: this.state.MovieList });
+  //   }
+  filterBySearch = e => {
+    debugger;
+    var updatedList = this.state.MovieList;
+    updatedList = updatedList.filter(function(item) {
+      if (
+        item.title.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1
+      ) {
+        return true;
+      }
+    });
+    this.setState({ MovieList: updatedList });
+  };
 
   render() {
-    const movieList = this.state.MovieList;
     return (
       <div>
-        <DisplayContent movies={movieList} genre={this.state.GenreList} />
+        <DisplayContent
+          movies={this.state.MovieList}
+          genre={this.state.GenreList}
+          filter={this.filterBySearch}
+        />
+        <button onClick={this.goToPage}> Next</button>
       </div>
     );
   }
