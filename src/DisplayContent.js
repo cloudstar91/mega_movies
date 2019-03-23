@@ -29,18 +29,39 @@ class DisplayContent extends React.Component {
       usersRuntimeValue: ""
     };
   }
+  // {min: 2000, max 2005}
+  // filterParentUserChange = value => {
+  // debugger;
+  // this.props.movies.map(item => {
+  //   //
+  //   let momentObj = moment(item.release_date).format("YYYY-MM-DD");
+  //   momentObj = moment().year();
+  //   if (momentObj < value.max && momentObj > value.min) {
+  //     return item;
+  //   }
+  // });
+  // this.props.movies.filter(this.filterYear);
+  // };
+  filterParentUserChange = value => {
+    this.props.movies.filter(item => {
+      // debugger;
+      return (
+        parseInt(moment(item.release_date).format("YYYY")) <=
+          parseInt(value.max) &&
+        parseInt(moment(item.release_date).format("YYYY")) > parseInt(value.min)
+      );
+    });
+    debugger;
+    console.log(this.props.movies);
+  };
 
-  //   filterParentUserChange = value => {
-  //     this.props.movies.map(item => {
-  //       let momentObj = moment(item.release_date).format("YYYY-MM-DD");
-  //       momentObj = moment().year();
-
-  //     });
-  //   };
+  filterYear = (item, value) => {};
 
   onYearChangeValue = value => {
+    // debugger;
     this.setState({ yearValue: value });
-    // this.filterParentUserChange(value);
+
+    this.filterParentUserChange(value);
   };
 
   componentDidMount() {}
@@ -56,7 +77,7 @@ class DisplayContent extends React.Component {
       }
     }
 
-    return genres;
+    return genres.join("-");
   };
 
   handleDropDown(a) {
@@ -67,10 +88,6 @@ class DisplayContent extends React.Component {
     const genList = this.props.genre.map(item => {
       return <option value="1">{item.name}</option>;
     });
-
-    const Dropdown = () => (
-      <Dropdown placeholder="State" search selection options={genList} />
-    );
 
     // var GenreListObj = {};
 
@@ -94,6 +111,23 @@ class DisplayContent extends React.Component {
         />
       );
     });
+
+    // let result = this.props.movies.map(item => {
+    //   let movieGenre = [];
+    //   let countGenre = {};
+    //   movieGenre = this.vlookupGenre(genreList, item.genre_ids);
+
+    //   movieGenre.map(item => {
+    //     if (countGenre[item]) {
+    //       countGenre[item]++;
+    //     } else {
+    //       countGenre[item] = 1;
+    //     }
+    //   });
+
+    // });
+    // console.log(result);
+
     // this.extractGenre(this.props.genre, this.props.movies);
     // let b = a.map(item => {
     //   return <div>{item.title}</div>;
