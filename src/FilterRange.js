@@ -1,61 +1,62 @@
-// import React from "react";
+import React from "react";
 
-// import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
-// import SearchBar from "./SearchBar";
-// import ImageCard from "./ImageCard";
-// import InputRange from "react-input-range";
-// import "react-input-range/lib/css/index.css";
+import InputRange from "react-input-range";
+import moment from "moment";
+import PaginationComponent from "react-reactstrap-pagination";
 
-// class FilterRange extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     // this.handleChange = this.handleOnChange.bind(this);
-//     this.state = {
-//       yearValue: {
-//         min: 2000,
-//         max: 2019
-//       },
-//       ratingValue: {
-//         min: 2000,
-//         max: 2019
-//       },
-//       runtimeValue: {
-//         min: 2000,
-//         max: 2019
-//       },
-//       userYearValue: "",
-//       userRatingValue: "",
-//       usersRuntimeValue: ""
-//     };
-//   }
+import "react-input-range/lib/css/index.css";
 
-//   //   handleOnChange = e => {
-//   //     this.setState({ yearValue: e.target.value });
-//   //   };
+class FilterRange extends React.Component {
+  constructor(props) {
+    super(props);
 
-//   render() {
-//     return (
-//       <div>
-//         <p>Year</p>
-//         <InputRange
-//           draggableTrack
-//           maxValue={2019}
-//           minValue={1990}
-//           onChange={value => this.setState({ yearValue: value })}
-//           onChangeComplete={value => console.log(value)}
-//           value={this.state.yearValue}
-//         />
-//         <button>SUBMIT</button>
-//       </div>
-//     );
-//   }
-// }
+    this.state = {
+      yearValue: {
+        min: 2000,
+        max: 2019
+      },
+      ratingValue: {
+        min: 0,
+        max: 10
+      },
+      runtimeValue: {
+        min: 2000,
+        max: 2019
+      }
+    };
+  }
 
-// // }
-// //     <FilterRange
-// //     formatLabel={value => `${value}cm`}
-// //     value={this.state.value}
-// //     onChange={value => this.setState({ value })} />
+  render() {
+    return (
+      <div>
+        <p>Year</p>
+        <InputRange
+          draggableTrack
+          maxValue={2019}
+          minValue={1990}
+          onChange={value => this.setState({ yearValue: value })}
+          onChangeComplete={value =>
+            this.props.onYearChanged(value.min, value.max)
+          }
+          value={this.state.yearValue}
+        />
+        <p>Rate</p>
+        <InputRange
+          draggableTrack
+          maxValue={10}
+          minValue={0}
+          onChange={value => this.setState({ ratingValue: value })}
+          onChangeComplete={value =>
+            this.props.onRatingChanged(value.min, value.max)
+          }
+          value={this.state.ratingValue}
+        />
+      </div>
+    );
+  }
+}
 
-// export default FilterRange;
+export default FilterRange;

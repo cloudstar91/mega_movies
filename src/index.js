@@ -2,11 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-
+import PaginationComponent from "react-reactstrap-pagination";
+import FilterRange from "./FilterRange";
+import SearchBar from "./SearchBar";
+import ImageCard from "./ImageCard";
 import DisplayContent from "./DisplayContent";
 import "./index.css";
 import moment from "moment";
-import Pagination from "react-js-pagination";
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -16,6 +18,7 @@ class MainApp extends React.Component {
       MovieList: [],
       FilteredMovieList: [],
       SearchKeyword: "",
+      Total_pages: 1,
 
       Movie: {
         Title: "",
@@ -30,7 +33,7 @@ class MainApp extends React.Component {
       MinYear: 2000,
       MaxRate: 10,
       MinRate: 0,
-      ActivePage: 10
+      selectedPage: 1
     };
 
     this.API_KEY = `daf966ec004a4c2e755a29fc1605e0cb`;
@@ -43,6 +46,11 @@ class MainApp extends React.Component {
     this.getGenreList();
     this.getMovieList();
   };
+
+  handleSelected(selectedPage) {
+    console.log("selected", selectedPage);
+    this.setState({ selectedPage: selectedPage });
+  }
 
   getGenreList = async () => {
     let GenURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${
@@ -58,14 +66,15 @@ class MainApp extends React.Component {
 
   getMovieList = async () => {
     const URL = `https://api.themoviedb.org/3/trending/all/day?&page=${
-      this.page
+      this.state.selectedPage
     }&api_key=${this.API_KEY}`;
 
     let response = await fetch(URL);
     let data = await response.json();
-    data = data.results;
+    let data1 = data.results;
+    let data2 = data.total_results;
 
-    this.setState({ MovieList: data });
+    this.setState({ MovieList: data1, Total_pages: data2 });
     //   Title: data.title,
     //       Genre: "",
     //           Released: data.release_date,
@@ -87,11 +96,6 @@ class MainApp extends React.Component {
   onRatingChanged = (min, max) => {
     this.setState({ MaxRate: max, MinRate: min });
   };
-
-  handlePageChange(pageNumber) {
-    console.log(`active page is ${pageNumber}`);
-    this.setState({ activePage: pageNumber });
-  }
 
   render() {
     const movies = this.state.MovieList.filter(item => {
@@ -121,16 +125,33 @@ class MainApp extends React.Component {
 
     console.log(this.state.SearchKeyword);
     return (
-      <div>
-        <DisplayContent
-          onYearChanged={this.onYearChanged}
-          onRatingChanged={this.onRatingChanged}
-          movies={movies}
-          genre={this.state.GenreList}
-          filter={this.filterBySearch}
-        />
-        <button onClick={this.goToPage}> Next</button>
+      <div className="container" style={{ maxWidth: "1400px" }}>
+        <h1> MEGA MOVIES</h1>
+
+        <SearchBar filter={this.filterBySearch} />
+
+        <div className="row">
+          <div className="col-3">
+            <FilterRange
+              onYearChanged={this.onYearChanged}
+              onRatingChanged={this.onRatingChanged}
+            />
+          </div>
+          <div className="col-9">
+            <ImageCard movies={movies} genre={this.state.GenreList} />
+          </div>
+        </div>
       </div>
+
+      //     <DisplayContent
+      //       //   onYearChanged={this.onYearChanged}
+      //       //   onRatingChanged={this.onRatingChanged}
+      //       selectedPage={this.handleSelected}
+      //       total_pages={this.Total_pages}
+      //       movies={movies}
+      //       genre={this.state.GenreList}
+      //     />
+      //   </div>
     );
   }
 }

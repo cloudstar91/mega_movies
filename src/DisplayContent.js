@@ -5,6 +5,8 @@ import "./index.css";
 
 import InputRange from "react-input-range";
 import moment from "moment";
+import PaginationComponent from "react-reactstrap-pagination";
+
 import "react-input-range/lib/css/index.css";
 
 class DisplayContent extends React.Component {
@@ -111,27 +113,6 @@ class DisplayContent extends React.Component {
     // });
     return (
       <div className="container" style={{ maxWidth: "1400px" }}>
-        <h1> MEGA MOVIES</h1>
-
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search"
-            name="filter"
-            onChange={this.props.filter}
-          />
-          <div className="input-group-prepend">
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              id="button-addon1"
-            >
-              SEARCH
-            </button>
-          </div>
-        </div>
-
         <div className="row">
           <div className="col-3 border">
             <div className="row" />
@@ -172,8 +153,19 @@ class DisplayContent extends React.Component {
             </div>
           </div>
           <div className="col-9 border">
-            <div class="row">{render}</div>
+            <div className="row">{render}</div>
           </div>
+        </div>
+
+        <div className="row">
+          <h5>Specific maxPaginationNumbers (9) activePage (2)</h5>
+          <PaginationComponent
+            totalItems={this.props.total_pages}
+            // pageSize={3}
+            onSelect={this.props.selectedPage}
+            maxPaginationNumbers={9}
+            activePage={1}
+          />
         </div>
       </div>
     );
@@ -205,48 +197,5 @@ class ResultDisplay extends React.Component {
     );
   }
 }
-
-// class SideBox extends React.Component {
-//   //   handleOnChange = e => {
-//   //     this.setState({ yearValue: e.target.value });
-//   //   };
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       yearValue: {
-//         min: 2000,
-//         max: 2019
-//       },
-//       ratingValue: {
-//         min: 2000,
-//         max: 2019
-//       },
-//       runtimeValue: {
-//         min: 2000,
-//         max: 2019
-//       },
-//       userYearValue: "",
-//       userRatingValue: "",
-//       usersRuntimeValue: ""
-//     };
-//   }
-//   render() {
-//     return (
-//       <div>
-//         <p>Year</p>
-//         <InputRange
-//           draggableTrack
-//           maxValue={2019}
-//           minValue={1990}
-//           onChange={value => this.setState({ yearValue: value })}
-//           onChangeComplete={value => console.log(value)}
-//           value={this.state.yearValue}
-//         />
-//         <button>SUBMIT</button>
-//       </div>
-//     );
-//   }
-// }
 
 export default DisplayContent;
