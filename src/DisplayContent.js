@@ -42,27 +42,8 @@ class DisplayContent extends React.Component {
   // });
   // this.props.movies.filter(this.filterYear);
   // };
-  filterParentUserChange = value => {
-    this.props.movies.filter(item => {
-      // debugger;
-      return (
-        parseInt(moment(item.release_date).format("YYYY")) <=
-          parseInt(value.max) &&
-        parseInt(moment(item.release_date).format("YYYY")) > parseInt(value.min)
-      );
-    });
-    debugger;
-    console.log(this.props.movies);
-  };
 
   filterYear = (item, value) => {};
-
-  onYearChangeValue = value => {
-    // debugger;
-    this.setState({ yearValue: value });
-
-    this.filterParentUserChange(value);
-  };
 
   componentDidMount() {}
 
@@ -175,8 +156,10 @@ class DisplayContent extends React.Component {
                 draggableTrack
                 maxValue={2019}
                 minValue={1990}
-                onChange={this.onYearChangeValue}
-                onChangeComplete={value => console.log(value)}
+                onChange={value => this.setState({ yearValue: value })}
+                onChangeComplete={value =>
+                  this.props.onYearChanged(value.min, value.max)
+                }
                 value={this.state.yearValue}
               />
               <button>SUBMIT</button>

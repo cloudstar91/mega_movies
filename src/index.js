@@ -5,6 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 
 import DisplayContent from "./DisplayContent";
 import "./index.css";
+import moment from "moment";
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -93,6 +94,29 @@ class MainApp extends React.Component {
     this.setState({ FilteredMovieList: updatedList });
   };
 
+  //   onYearChanged = (min, max) => {
+  //     console.log("AA");
+  //     console.log(min, max);
+  //   };
+
+  onYearChanged = (min, max) => {
+    let filterarray = this.state.MovieList.filter(item => {
+      // debugger;
+      console.log(`${min} - ${max}`);
+      console.log(`${moment(item.release_date).format("YYYY")}`);
+      console.log("_____________");
+      return (
+        parseInt(moment(item.release_date).format("YYYY")) <= parseInt(max) &&
+        parseInt(moment(item.release_date).format("YYYY")) > parseInt(min)
+      );
+    });
+
+    debugger;
+    console.log(filterarray);
+
+    this.setState({ FilteredMovieList: filterarray });
+  };
+
   render() {
     const movies =
       this.state.SearchKeyword.length === 0
@@ -102,6 +126,7 @@ class MainApp extends React.Component {
     return (
       <div>
         <DisplayContent
+          onYearChanged={this.onYearChanged}
           movies={movies}
           genre={this.state.GenreList}
           filter={this.filterBySearch}
