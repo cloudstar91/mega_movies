@@ -49,22 +49,7 @@ class DisplayContent extends React.Component {
 
     return (
       <div>
-        <div className="row" />
-        <div className="input-group mb-3">
-          <div className="input-group-prepend">
-            <label className="input-group-text" for="inputGroupSelect01">
-              Genres
-            </label>
-          </div>
-          <select className="custom-select" id="inputGroupSelect01">
-            <option selected>Choose...</option>
-            {genList}
-          </select>
-        </div>
-
-        <div className="col-12 border">
-          <div className="row">{render}</div>
-        </div>
+        <div className="row">{render}</div>
       </div>
     );
   }

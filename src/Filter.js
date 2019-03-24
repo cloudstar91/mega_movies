@@ -9,7 +9,7 @@ import PaginationComponent from "react-reactstrap-pagination";
 
 import "react-input-range/lib/css/index.css";
 
-class FilterRange extends React.Component {
+class Filter extends React.Component {
   constructor(props) {
     super(props);
 
@@ -30,8 +30,23 @@ class FilterRange extends React.Component {
   }
 
   render() {
+    const genList = this.props.genre.map(item => {
+      return <option value={item.name}>{item.name}</option>;
+    });
+
     return (
       <div>
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <label className="input-group-text" for="inputGroupSelect01">
+              Genres
+            </label>
+          </div>
+          <select className="custom-select" id="inputGroupSelect01">
+            <option selected>Choose...</option>
+            {genList}
+          </select>
+        </div>
         <p>Year</p>
         <InputRange
           draggableTrack
@@ -59,4 +74,4 @@ class FilterRange extends React.Component {
   }
 }
 
-export default FilterRange;
+export default Filter;

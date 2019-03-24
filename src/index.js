@@ -3,10 +3,10 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import PaginationComponent from "react-reactstrap-pagination";
-import FilterRange from "./FilterRange";
+import Filter from "./Filter";
 import SearchBar from "./SearchBar";
 import ImageCard from "./ImageCard";
-import DisplayContent from "./DisplayContent";
+
 import "./index.css";
 import moment from "moment";
 
@@ -75,11 +75,6 @@ class MainApp extends React.Component {
     let data2 = data.total_results;
 
     this.setState({ MovieList: data1, Total_pages: data2 });
-    //   Title: data.title,
-    //       Genre: "",
-    //           Released: data.release_date,
-    //               Rating: data.vote_average,
-    //                   ImgSrc: data.poster_path
   };
 
   componentDidMount() {
@@ -132,9 +127,11 @@ class MainApp extends React.Component {
 
         <div className="row">
           <div className="col-3">
-            <FilterRange
+            <Filter
               onYearChanged={this.onYearChanged}
               onRatingChanged={this.onRatingChanged}
+              movies={movies}
+              genre={this.state.GenreList}
             />
           </div>
           <div className="col-9">
