@@ -6,6 +6,7 @@ import PaginationComponent from "react-reactstrap-pagination";
 import Filter from "./Filter";
 import SearchBar from "./SearchBar";
 import ImageCard from "./ImageCard";
+import Pagination from "./Pagination";
 
 import "./index.css";
 import moment from "moment";
@@ -41,16 +42,11 @@ class MainApp extends React.Component {
   }
   debugger;
 
-  goToPage = () => {
-    this.page += 1;
-    this.getGenreList();
-    this.getMovieList();
-  };
-
-  handleSelected(selectedPage) {
+  handleSelected = selectedPage => {
     console.log("selected", selectedPage);
     this.setState({ selectedPage: selectedPage });
-  }
+    this.getMovieList();
+  };
 
   getGenreList = async () => {
     let GenURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${
@@ -137,18 +133,16 @@ class MainApp extends React.Component {
           <div className="col-9">
             <ImageCard movies={movies} genre={this.state.GenreList} />
           </div>
+
+          <Pagination
+            // totalItems={50}
+            // pageSize={3}
+            onSelect={this.handleSelected}
+            // maxPaginationNumbers={9}
+            // activePage={2}
+          />
         </div>
       </div>
-
-      //     <DisplayContent
-      //       //   onYearChanged={this.onYearChanged}
-      //       //   onRatingChanged={this.onRatingChanged}
-      //       selectedPage={this.handleSelected}
-      //       total_pages={this.Total_pages}
-      //       movies={movies}
-      //       genre={this.state.GenreList}
-      //     />
-      //   </div>
     );
   }
 }

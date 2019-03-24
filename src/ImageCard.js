@@ -3,9 +3,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
-import InputRange from "react-input-range";
 import moment from "moment";
-import PaginationComponent from "react-reactstrap-pagination";
 
 import "react-input-range/lib/css/index.css";
 
@@ -25,10 +23,6 @@ class DisplayContent extends React.Component {
   };
 
   render() {
-    const genList = this.props.genre.map(item => {
-      return <option value={item.name}>{item.name}</option>;
-    });
-
     let genreList = this.props.genre;
 
     let render = this.props.movies.map(item => {
