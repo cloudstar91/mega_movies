@@ -17,8 +17,8 @@ class DisplayContent extends React.Component {
         max: 2019
       },
       ratingValue: {
-        min: 2000,
-        max: 2019
+        min: 0,
+        max: 10
       },
       runtimeValue: {
         min: 2000,
@@ -43,10 +43,6 @@ class DisplayContent extends React.Component {
   // this.props.movies.filter(this.filterYear);
   // };
 
-  filterYear = (item, value) => {};
-
-  componentDidMount() {}
-
   vlookupGenre = (genreList, ids) => {
     var genres = [];
     for (var i = 0; i < ids.length; i++) {
@@ -67,7 +63,7 @@ class DisplayContent extends React.Component {
 
   render() {
     const genList = this.props.genre.map(item => {
-      return <option value="1">{item.name}</option>;
+      return <option value={item.name}>{item.name}</option>;
     });
 
     // var GenreListObj = {};
@@ -162,7 +158,17 @@ class DisplayContent extends React.Component {
                 }
                 value={this.state.yearValue}
               />
-              <button>SUBMIT</button>
+              <p>Rate</p>
+              <InputRange
+                draggableTrack
+                maxValue={10}
+                minValue={0}
+                onChange={value => this.setState({ ratingValue: value })}
+                onChangeComplete={value =>
+                  this.props.onRatingChanged(value.min, value.max)
+                }
+                value={this.state.ratingValue}
+              />
             </div>
           </div>
           <div className="col-9 border">

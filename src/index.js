@@ -6,6 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import DisplayContent from "./DisplayContent";
 import "./index.css";
 import moment from "moment";
+import Pagination from "react-js-pagination";
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -24,7 +25,12 @@ class MainApp extends React.Component {
         ImgSrc: ""
       },
 
-      GenreList: []
+      GenreList: [],
+      MaxYear: 2019,
+      MinYear: 2000,
+      MaxRate: 10,
+      MinRate: 0,
+      ActivePage: 10
     };
 
     this.API_KEY = `daf966ec004a4c2e755a29fc1605e0cb`;
@@ -73,60 +79,52 @@ class MainApp extends React.Component {
   }
 
   filterBySearch = e => {
-    var updatedList = this.state.MovieList;
-    updatedList = updatedList.filter(function(item) {
-      const name = item.title || item.original_name || item.original_title;
-
-      if (name) {
-        if (name.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1) {
-          return true;
-        }
-        // item.title.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1 ||
-        // item.original_title
-        //   .toLowerCase()
-        //   .indexOf(e.target.value.toLowerCase()) !== -1 ||
-        // item.original_name
-        //   .toLowerCase()
-        //   .indexOf(e.target.value.toLowerCase()) !== -1
-      }
-    });
     this.setState({ SearchKeyword: e.target.value });
-    this.setState({ FilteredMovieList: updatedList });
   };
-
-  //   onYearChanged = (min, max) => {
-  //     console.log("AA");
-  //     console.log(min, max);
-  //   };
-
   onYearChanged = (min, max) => {
-    let filterarray = this.state.MovieList.filter(item => {
-      // debugger;
-      console.log(`${min} - ${max}`);
-      console.log(`${moment(item.release_date).format("YYYY")}`);
-      console.log("_____________");
-      return (
-        parseInt(moment(item.release_date).format("YYYY")) <= parseInt(max) &&
-        parseInt(moment(item.release_date).format("YYYY")) > parseInt(min)
-      );
-    });
-
-    debugger;
-    console.log(filterarray);
-
-    this.setState({ FilteredMovieList: filterarray });
+    this.setState({ MaxYear: max, MixYear: min });
   };
+  onRatingChanged = (min, max) => {
+    this.setState({ MaxRate: max, MinRate: min });
+  };
+
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({ activePage: pageNumber });
+  }
 
   render() {
-    const movies =
-      this.state.SearchKeyword.length === 0
-        ? this.state.MovieList
-        : this.state.FilteredMovieList;
+    const movies = this.state.MovieList.filter(item => {
+      const name = item.title || item.original_name || item.original_title;
+      return (
+        name &&
+        name.toLowerCase().indexOf(this.state.SearchKeyword.toLowerCase()) !==
+          -1
+      );
+    })
+      .filter(item => {
+        // debugger;
+
+        return (
+          parseInt(moment(item.release_date).format("YYYY")) <=
+            parseInt(this.state.MaxYear) &&
+          parseInt(moment(item.release_date).format("YYYY")) >
+            parseInt(this.state.MinYear)
+        );
+      })
+      .filter(item => {
+        return (
+          parseInt(item.vote_average) <= this.state.MaxRate &&
+          parseInt(item.vote_average) > this.state.MinRate
+        );
+      });
+
     console.log(this.state.SearchKeyword);
     return (
       <div>
         <DisplayContent
           onYearChanged={this.onYearChanged}
+          onRatingChanged={this.onRatingChanged}
           movies={movies}
           genre={this.state.GenreList}
           filter={this.filterBySearch}
