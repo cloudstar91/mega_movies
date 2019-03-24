@@ -55,7 +55,7 @@ class ResultDisplay extends React.Component {
     return (
       <div className="col-4">
         <div className="card-deck" style={{ height: "660px" }}>
-          <div className="card">
+          <div className="card mb-3">
             <img
               src={"https://image.tmdb.org/t/p/w500/" + this.props.poster}
               className="card-img-top"

@@ -6,6 +6,7 @@ body {
     sans-serif;
   background: black;
   border-color: orange;
+  color: white;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -24,11 +25,56 @@ code {
     max-width: 60%;
   }
 }
+.page-link {
+  padding: 0.5rem 1.75rem;
 
+  line-height: 2.25 !important;
+  color: rgba(0, 0, 0, 0.87);
+  background: rgb(254, 150, 55) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(254, 150, 55, 1) 0%,
+    rgba(252, 161, 59, 0.9122023809523809) 50%,
+    rgba(244, 133, 12, 1) 63%,
+    rgba(244, 148, 25, 1) 77%,
+    rgba(252, 124, 76, 1) 100%
+  ) !important;
+  border: 1px solid #212529 !important;
+}
+.custom-select {
+  background-color: #1b1c1d !important;
+  border: 1px solid #f2711c !important;
+  font-size: 1.5rem !important;
+  color: #dfeefd !important;
+}
+.input-group-text {
+  background: rgb(254, 150, 55) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(254, 150, 55, 1) 0%,
+    rgba(252, 161, 59, 0.9122023809523809) 50%,
+    rgba(244, 133, 12, 1) 63%,
+    rgba(244, 148, 25, 1) 77%,
+    rgba(252, 124, 76, 1) 100%
+  ) !important;
+  border: 1px solid #f2711c !important;
+  color: rgba(0, 0, 0, 0.95) !important;
+  font-size: 1.5rem !important;
+}
+.card {
+  border: 1px solid #f2711c !important;
+  background-color: transparent !important;
+}
 .input-range {
-  margin-bottom: 160px;
+  margin-bottom: 50px;
 }
 
+.input-range__track--active {
+  background: #f2711c !important;
+}
+.input-range__slider {
+  background: white !important;
+}
 .nav-style {
   color: black;
   font-weight: bold;
@@ -47,4 +93,11 @@ code {
 .search-style {
   height: 50px;
   width: 150px;
+}
+
+.form-control {
+  background-color: transparent !important;
+  border-color: black !important;
+  border: 3px solid #000000 !important;
+  width: 250px !important;
 }
