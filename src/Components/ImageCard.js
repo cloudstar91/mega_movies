@@ -1,7 +1,7 @@
 import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.css";
+import "../index.css";
 
 import moment from "moment";
 
@@ -33,10 +33,11 @@ class DisplayContent extends React.Component {
       return (
         <ResultDisplay
           genre={this.vlookupGenre(genreList, item.genre_ids)}
-          title={item.title}
+          name={item.title || item.original_name || item.original_title}
           release={momentObj}
           poster={item.poster_path}
           rating={item.vote_average}
+          id={item.id}
         />
       );
     });
@@ -61,7 +62,9 @@ class ResultDisplay extends React.Component {
               alt="poster"
             />
             <div className="card-body">
-              <h5 className="card-title">{this.props.title}</h5>
+              <a href={"movie/" + this.props.id}>
+                <h4 className="card-title">{this.props.name}</h4>
+              </a>
               <p className="card-text">{this.props.genre}</p>
             </div>
             <div className="card-footer d-flex justify-content-between">

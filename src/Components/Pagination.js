@@ -2,7 +2,7 @@ import React from "react";
 
 import PaginationComponent from "react-reactstrap-pagination";
 
-import "./index.css";
+import "../index.css";
 
 class Pagination extends React.Component {
   render() {
