@@ -25,6 +25,9 @@ code {
     max-width: 60%;
   }
 }
+.page-style {
+  border-color: white !important;
+}
 .page-link {
   padding: 0.5rem 1.75rem;
 
@@ -66,7 +69,7 @@ code {
   background-color: transparent !important;
 }
 .input-range {
-  margin-bottom: 50px;
+  margin-bottom: 90px;
 }
 
 .input-range__track--active {

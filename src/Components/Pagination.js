@@ -8,6 +8,7 @@ class Pagination extends React.Component {
   render() {
     return (
       <PaginationComponent
+        className="page-style"
         totalItems={50}
         pageSize={3}
         onSelect={this.props.onSelect}

@@ -36,7 +36,7 @@ class Filter extends React.Component {
 
     return (
       <div>
-        <div className="input-group mb-3">
+        <div className="input-group mb-5">
           <div className="input-group-prepend">
             <label className="input-group-text" for="inputGroupSelect01">
               Genres
@@ -47,7 +47,7 @@ class Filter extends React.Component {
             {genList}
           </select>
         </div>
-        <p>Year</p>
+        <h5>Year</h5>
         <InputRange
           draggableTrack
           maxValue={2019}
@@ -58,7 +58,7 @@ class Filter extends React.Component {
           }
           value={this.state.yearValue}
         />
-        <p>Rate</p>
+        <h5>Rate</h5>
         <InputRange
           draggableTrack
           maxValue={10}

@@ -117,8 +117,8 @@ class Home extends React.Component {
 
     console.log(this.state.SearchKeyword);
     return (
-      <div className="container" style={{ maxWidth: "1400px" }}>
-        <nav className="nav-style navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between  ">
+      <div className="container text-center" style={{ maxWidth: "1400px" }}>
+        <nav className="nav-style navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between mt-2 mb-5 ">
           <h1 className=""> MEGA MOVIES</h1>
           <form className="form-inline my-2 my-lg-0 ">
             <SearchBar filter={this.filterBySearch} />
@@ -138,14 +138,15 @@ class Home extends React.Component {
           <div className="col-9">
             <ImageCard movies={movies} genre={this.state.GenreList} />
           </div>
-
-          <Pagination
-            // totalItems={50}
-            // pageSize={3}
-            onSelect={this.handleSelected}
-            // maxPaginationNumbers={9}
-            // activePage={2}
-          />
+          <div className="row my-3 mx-auto">
+            <Pagination
+              // totalItems={50}
+              // pageSize={3}
+              onSelect={this.handleSelected}
+              // maxPaginationNumbers={9}
+              // activePage={2}
+            />
+          </div>
         </div>
         <MovieDetail />
       </div>
