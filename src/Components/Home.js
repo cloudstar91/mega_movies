@@ -18,6 +18,8 @@ class Home extends React.Component {
       SearchKeyword: "",
       Total_pages: 1,
       Total_Results: "",
+      selectedGenre: "",
+      // genreValue: "",
 
       Movie: {
         Title: "",
@@ -48,18 +50,6 @@ class Home extends React.Component {
   }
   debugger;
 
-  handleSelected = selectedPage => {
-    console.log("selected", selectedPage);
-    this.setState({ selectedPage: selectedPage });
-    this.getMovieList();
-  };
-  handleYearChange = value => {
-    this.setState({ yearValue: value });
-  };
-  handleRateChange = value => {
-    this.setState({ ratingValue: value });
-  };
-
   getGenreList = async () => {
     let GenURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${
       this.API_KEY
@@ -73,18 +63,19 @@ class Home extends React.Component {
   };
 
   getMovieList = async () => {
-    const URL = `https://api.themoviedb.org/3/trending/all/day?&page=${
+    console.log("a");
+    const URL = `https://api.themoviedb.org/3/discover/movie?&page=${
       this.state.selectedPage
-    }&api_key=${this.API_KEY}`;
+    }&api_key=${this.API_KEY}&with_genres=${this.state.selectedGenre}`;
 
-    // & with_genres=${ this.state.chosenGenre }
+    //
 
     let response = await fetch(URL);
     let data = await response.json();
     let data1 = data.results;
     let data2 = data.total_pages;
     let data3 = data.total_results;
-
+    console.log(URL);
     this.setState({
       MovieList: data1,
       Total_pages: data2,
@@ -106,10 +97,30 @@ class Home extends React.Component {
   onRatingChanged = (min, max) => {
     this.setState({ MaxRate: max, MinRate: min });
   };
+  handleSelected = selectedPage => {
+    console.log("selected", selectedPage);
+    this.setState({ selectedPage: selectedPage });
+    this.getMovieList();
+  };
+  handleYearChange = value => {
+    this.setState({ yearValue: value });
+  };
+  handleRateChange = value => {
+    this.setState({ ratingValue: value });
+  };
+  handleSelectFilter = event => {
+    if (event.target.value !== null) {
+      this.setState({ selectedGenre: event.target.value }, () =>
+        this.getMovieList()
+      );
+    }
+    console.log(event.target.value);
+  };
 
   render() {
     const genList = this.state.GenreList.map(item => item.name);
     console.log("gen", genList);
+
     const movies = this.state.MovieList.filter(item => {
       const name = item.title || item.original_name || item.original_title;
       return (
@@ -149,11 +160,12 @@ class Home extends React.Component {
               onRatingChanged={value =>
                 this.onRatingChanged(value.min, value.max)
               }
+              handleSelectedGenre={this.handleSelectFilter}
               valueOfYear={this.state.yearValue}
               valueOfRate={this.state.ratingValue}
               movies={movies}
               genre={this.state.GenreList}
-              genName={this.genList}
+              genName={genList}
             />
           </div>
           <div className="col-9">
