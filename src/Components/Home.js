@@ -1,12 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom";
-// import App from "./App";
-// import * as serviceWorker from "./serviceWorker";
+
 import Filter from "./Filter";
 import SearchBar from "./SearchBar";
 import ImageCard from "./ImageCard";
 import Pagination from "./Pagination";
-import MovieDetail from "./MovieDetail";
+
 // import "./index.css";
 import moment from "moment";
 
@@ -28,6 +26,14 @@ class Home extends React.Component {
         Rating: "",
         ImgSrc: ""
       },
+      yearValue: {
+        min: 2000,
+        max: 2019
+      },
+      ratingValue: {
+        min: 0,
+        max: 10
+      },
 
       GenreList: [],
       MaxYear: 2019,
@@ -46,6 +52,12 @@ class Home extends React.Component {
     console.log("selected", selectedPage);
     this.setState({ selectedPage: selectedPage });
     this.getMovieList();
+  };
+  handleYearChange = value => {
+    this.setState({ yearValue: value });
+  };
+  handleRateChange = value => {
+    this.setState({ ratingValue: value });
   };
 
   getGenreList = async () => {
@@ -116,8 +128,8 @@ class Home extends React.Component {
       })
       .filter(item => {
         return (
-          parseInt(item.vote_average) <= this.state.MaxRate &&
-          parseInt(item.vote_average) > this.state.MinRate
+          parseFloat(item.vote_average) <= this.state.MaxRate &&
+          parseFloat(item.vote_average) > this.state.MinRate
         );
       });
 
@@ -134,8 +146,14 @@ class Home extends React.Component {
         <div className="row my-3">
           <div className="col-3">
             <Filter
-              onYearChanged={this.onYearChanged}
-              onRatingChanged={this.onRatingChanged}
+              filterYear={value => this.handleYearChange(value)}
+              filterRate={value => this.handleRateChange(value)}
+              onYearChanged={value => this.onYearChanged(value.min, value.max)}
+              onRatingChanged={value =>
+                this.onRatingChanged(value.min, value.max)
+              }
+              valueOfYear={this.state.yearValue}
+              valueOfRate={this.state.ratingValue}
               movies={movies}
               genre={this.state.GenreList}
               genName={this.genList}

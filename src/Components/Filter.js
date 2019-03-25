@@ -4,31 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../index.css";
 
 import InputRange from "react-input-range";
-import moment from "moment";
-import PaginationComponent from "react-reactstrap-pagination";
 
 import "react-input-range/lib/css/index.css";
 
 class Filter extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      yearValue: {
-        min: 2000,
-        max: 2019
-      },
-      ratingValue: {
-        min: 0,
-        max: 10
-      },
-      runtimeValue: {
-        min: 2000,
-        max: 2019
-      }
-    };
-  }
-
   render() {
     const genList = this.props.genre.map((item, index) => {
       return (
@@ -54,22 +33,18 @@ class Filter extends React.Component {
           draggableTrack
           maxValue={2019}
           minValue={1990}
-          onChange={value => this.setState({ yearValue: value })}
-          onChangeComplete={value =>
-            this.props.onYearChanged(value.min, value.max)
-          }
-          value={this.state.yearValue}
+          onChange={this.props.filterYear}
+          onChangeComplete={this.props.onYearChanged}
+          value={this.props.valueOfYear}
         />
         <h5>Rate</h5>
         <InputRange
           draggableTrack
           maxValue={10}
           minValue={0}
-          onChange={value => this.setState({ ratingValue: value })}
-          onChangeComplete={value =>
-            this.props.onRatingChanged(value.min, value.max)
-          }
-          value={this.state.ratingValue}
+          onChange={this.props.filterRate}
+          onChangeComplete={this.props.onRatingChanged}
+          value={this.props.valueOfRate}
         />
       </div>
     );
