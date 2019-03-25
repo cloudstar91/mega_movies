@@ -36,7 +36,7 @@ class Filter extends React.Component {
         <InputRange
           draggableTrack
           maxValue={2019}
-          minValue={1980}
+          minValue={1990}
           onChange={this.props.filterYear}
           onChangeComplete={this.props.onYearChanged}
           value={this.props.valueOfYear}

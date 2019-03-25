@@ -29,7 +29,7 @@ class Home extends React.Component {
         ImgSrc: ""
       },
       yearValue: {
-        min: 2000,
+        min: 1990,
         max: 2019
       },
       ratingValue: {
@@ -42,7 +42,8 @@ class Home extends React.Component {
       MinYear: 2000,
       MaxRate: 10,
       MinRate: 0,
-      selectedPage: 1
+      selectedPage: 1,
+      currentPage: 1
     };
 
     this.API_KEY = `daf966ec004a4c2e755a29fc1605e0cb`;
@@ -124,32 +125,32 @@ class Home extends React.Component {
     const genList = this.state.GenreList.map(item => item.name);
     console.log("gen", genList);
 
-    const movies = this.state.MovieList;
+    // const movies = this.state.MovieList;
 
-    // const movies = this.state.MovieList.filter(item => {
-    //   const name = item.title || item.original_name || item.original_title;
-    //   return (
-    //     name &&
-    //     name.toLowerCase().indexOf(this.state.SearchKeyword.toLowerCase()) !==
-    //       -1
-    //   );
-    // })
-    //   .filter(item => {
-    //     // debugger;
+    const movies = this.state.MovieList.filter(item => {
+      const name = item.title || item.original_name || item.original_title;
+      return (
+        name &&
+        name.toLowerCase().indexOf(this.state.SearchKeyword.toLowerCase()) !==
+          -1
+      );
+    })
+      .filter(item => {
+        // debugger;
 
-    //     return (
-    //       parseInt(moment(item.release_date).format("YYYY")) <=
-    //         parseInt(this.state.MaxYear) &&
-    //       parseInt(moment(item.release_date).format("YYYY")) >
-    //         parseInt(this.state.MinYear)
-    //     );
-    //   })
-    //   .filter(item => {
-    //     return (
-    //       parseFloat(item.vote_average) <= this.state.MaxRate &&
-    //       parseFloat(item.vote_average) > this.state.MinRate
-    //     );
-    //   });
+        return (
+          parseInt(moment(item.release_date).format("YYYY")) <=
+            parseInt(this.state.MaxYear) &&
+          parseInt(moment(item.release_date).format("YYYY")) >
+            parseInt(this.state.MinYear)
+        );
+      })
+      .filter(item => {
+        return (
+          parseFloat(item.vote_average) <= this.state.MaxRate &&
+          parseFloat(item.vote_average) > this.state.MinRate
+        );
+      });
 
     console.log(this.state.SearchKeyword);
     return (
