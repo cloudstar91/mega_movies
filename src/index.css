@@ -138,3 +138,6 @@ code {
   border: 3px solid #fd7200 !important;
   width: 500px !important;
 }
+.btn-position {
+  margin-bottom: 10px;
+}

@@ -69,7 +69,7 @@ class MovieList extends React.Component {
               release={momentObj}
               poster={item.poster_path}
               rating={item.vote_average}
-              overview={item.overview.slice(0, 200) + "..."}
+              overview={item.overview.slice(0, 150) + "..."}
               id={item.id}
               handleOpenModal={this.handleOpenModal}
             />

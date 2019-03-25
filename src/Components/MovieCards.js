@@ -35,13 +35,17 @@ class MovieCards extends React.Component {
                     <p className="text-white">{this.props.rating}</p>
                   </div>
                 </div>
-
-                <button
-                  className="btn-style shadow-lg p-3 mb-5 bg-white rounded font-weight-bold"
-                  onClick={() => this.props.handleOpenModal(this.props.id)}
-                >
-                  TRAILER
-                </button>
+                <div className="d-flex justify-content-around my-3">
+                  <button
+                    className="btn-style shadow-lg p-3 mb-5 bg-white rounded font-weight-bold"
+                    onClick={() => this.props.handleOpenModal(this.props.id)}
+                  >
+                    TRAILER
+                  </button>
+                  <button className="btn-style shadow-lg p-3 mb-5 bg-white rounded font-weight-bold">
+                    VIEW MORE
+                  </button>
+                </div>
               </div>
             </div>
           </div>
