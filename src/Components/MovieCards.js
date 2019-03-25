@@ -18,8 +18,10 @@ class MovieCards extends React.Component {
             />
             <div className="position-relative">
               <div className="card-body-position">
-                <a href={"movie/" + this.props.id}>
-                  <h4 className="card-title">{this.props.name}</h4>
+                <a href={"/movie/" + this.props.id}>
+                  <h4 className="card-title text-decoration-none">
+                    {this.props.name}
+                  </h4>
                 </a>
                 <p className="card-text">{this.props.genre}</p>
 

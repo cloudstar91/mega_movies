@@ -32,13 +32,16 @@ code {
 .card:hover .card-body-position {
   height: 200px;
   right: 0;
+  background-color: rgba(17, 15, 15, 0.61);
 }
 .card {
   overflow: hidden;
 }
-/* .card-body {
-  position: relative !important;
-} */
+.card-title {
+  color: rgb(255, 123, 0);
+  font-size: 25px;
+  font-weight: bold;
+}
 .form {
   margin: 0 auto;
   padding: 100px 30px 0;
