@@ -26,6 +26,8 @@ class MovieCards extends React.Component {
               <small className="text-muted">{this.props.release}</small>
               <small className="text-muted">{this.props.rating}</small>
             </div>
+            {/* button to trigger Modal */}
+            <button onClick={() => this.props.handleOpenModal(this.props.id)}>Trigger Modal</button>
           </div>
         </div>
       </div>
