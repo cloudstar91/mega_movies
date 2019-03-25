@@ -36,7 +36,7 @@ class TrailerModal extends React.Component {
             background: "#fff",
             overflow: "hidden",
             WebkitOverflowScrolling: "touch",
-            borderRadius: "4px",
+            borderRadius: "3px",
             outline: "none",
             padding: "0",
             backgroundColor: "black"
