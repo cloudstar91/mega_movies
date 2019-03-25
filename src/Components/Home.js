@@ -66,7 +66,9 @@ class Home extends React.Component {
     console.log("a");
     const URL = `https://api.themoviedb.org/3/discover/movie?&page=${
       this.state.selectedPage
-    }&api_key=${this.API_KEY}&with_genres=${this.state.selectedGenre}`;
+    }&api_key=${this.API_KEY}&with_genres=${this.state.selectedGenre}&sort_by=${
+      this.state.sortBy
+    }`;
 
     //
 
