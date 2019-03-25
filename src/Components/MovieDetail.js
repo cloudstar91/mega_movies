@@ -13,7 +13,7 @@ class MovieDetail extends React.Component {
   }
 
   getMovieDetail = async () => {
-    const { params } = this.props.match;
+    const { params } = await this.props.match;
     const id = params.id;
     const URL = `https://api.themoviedb.org/3/movie/${id}?api_key=daf966ec004a4c2e755a29fc1605e0cb&language=en-US`;
 
@@ -24,6 +24,8 @@ class MovieDetail extends React.Component {
   };
 
   render() {
+    console.log(this.props);
+
     return (
       <div>
         <h1>{this.state.MovieDescription} </h1>

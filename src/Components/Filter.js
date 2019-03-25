@@ -30,20 +30,22 @@ class Filter extends React.Component {
   }
 
   render() {
-    const genList = this.props.genre.map(item => {
-      return <option value={item.name}>{item.name}</option>;
+    const genList = this.props.genre.map((item, index) => {
+      return (
+        <option key={index} value={item.name}>
+          {item.name}
+        </option>
+      );
     });
 
     return (
       <div>
         <div className="input-group mb-5">
           <div className="input-group-prepend">
-            <label className="input-group-text" for="inputGroupSelect01">
-              Genres
-            </label>
+            <label className="input-group-text">Genres</label>
           </div>
           <select className="custom-select" id="inputGroupSelect01">
-            <option selected>Choose...</option>
+            <option>Choose...</option>
             {genList}
           </select>
         </div>
