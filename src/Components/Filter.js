@@ -32,7 +32,7 @@ class Filter extends React.Component {
             {genList}
           </select>
         </div>
-        <h5>Year</h5>
+        <h5 className="mt-3">Year</h5>
         <InputRange
           draggableTrack
           maxValue={2019}
@@ -50,6 +50,17 @@ class Filter extends React.Component {
           onChangeComplete={this.props.onRatingChanged}
           value={this.props.valueOfRate}
         />
+
+        <h5>Runtime</h5>
+        <InputRange
+          draggableTrack
+          maxValue={10}
+          minValue={0}
+          onChange={this.props.filterRate}
+          onChangeComplete={this.props.onRatingChanged}
+          value={this.props.valueOfRate}
+        />
+
         <SearchBar searchBox={this.props.filter} />
       </div>
     );

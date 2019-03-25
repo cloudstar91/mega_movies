@@ -23,14 +23,21 @@ class MovieCards extends React.Component {
                     {this.props.name}
                   </h4>
                 </a>
-                <p className="card-text">{this.props.genre}</p>
+                <p className="card-text">{this.props.overview}</p>
 
                 <div className="card-footer d-flex justify-content-between">
-                  <small className="text-muted">{this.props.release}</small>
-                  <small className="text-muted">{this.props.rating}</small>
+                  <div>
+                    <p className="font-weight-bolder"> Year</p>
+                    <p className="text-white">{this.props.release}</p>
+                  </div>
+                  <div>
+                    <p className="font-weight-bolder"> Rate</p>
+                    <p className="text-white">{this.props.rating}</p>
+                  </div>
                 </div>
 
                 <button
+                  className="btn-style shadow-lg p-3 mb-5 bg-white rounded font-weight-bold"
                   onClick={() => this.props.handleOpenModal(this.props.id)}
                 >
                   TRAILER
