@@ -9,25 +9,19 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div>
-        <input
-          type="text"
-          className="form-control mr-sm-2 search-style"
-          placeholder="Search"
-          name="filter"
-          onChange={this.props.filter}
-        />
+        <nav className="nav-style navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between mt-2 mb-5 ">
+          <h1 className=""> MEGA MOVIES</h1>
+          <form className="form-inline my-2 my-lg-0 ">
+            <input
+              type="text"
+              className="form-control mr-sm-2 search-style"
+              placeholder="Search"
+              name="filter"
+              onChange={this.props.filter}
+            />
+          </form>
+        </nav>
       </div>
-
-      // <input className="form-control mr-sm-2"
-      //     type="text"
-      //     placeholder="Search"
-
-      //     name="filter"
-      //     onChange={this.props.filter}
-      // />
-      // <button className="btn btn-outline-success my-2 my-sm-0 btn-style" type="button">
-      //     Search
-      // </button>
     );
   }
 }

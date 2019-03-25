@@ -2,7 +2,7 @@ import React from "react";
 
 import Filter from "./Filter";
 import SearchBar from "./SearchBar";
-import ImageCard from "./ImageCard";
+import MovieList from "./MovieList";
 import Pagination from "./Pagination";
 
 // import "./index.css";
@@ -77,6 +77,8 @@ class Home extends React.Component {
       this.state.selectedPage
     }&api_key=${this.API_KEY}`;
 
+    // & with_genres=${ this.state.chosenGenre }
+
     let response = await fetch(URL);
     let data = await response.json();
     let data1 = data.results;
@@ -136,12 +138,7 @@ class Home extends React.Component {
     console.log(this.state.SearchKeyword);
     return (
       <div className="container text-center" style={{ maxWidth: "1400px" }}>
-        <nav className="nav-style navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between mt-2 mb-5 ">
-          <h1 className=""> MEGA MOVIES</h1>
-          <form className="form-inline my-2 my-lg-0 ">
-            <SearchBar filter={this.filterBySearch} />
-          </form>
-        </nav>
+        <SearchBar filter={this.filterBySearch} />
 
         <div className="row my-3">
           <div className="col-3">
@@ -160,7 +157,7 @@ class Home extends React.Component {
             />
           </div>
           <div className="col-9">
-            <ImageCard movies={movies} genre={this.state.GenreList} />
+            <MovieList movies={movies} genre={this.state.GenreList} />
           </div>
           <div className="row my-3 mx-auto">
             <Pagination
