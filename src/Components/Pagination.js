@@ -12,8 +12,8 @@ class Pagination extends React.Component {
         totalItems={50}
         pageSize={3}
         onSelect={this.props.onSelect}
-        maxPaginationNumbers={9}
-        activePage={2}
+        maxPaginationNumbers={15}
+        activePage={1}
       />
     );
   }

@@ -19,6 +19,7 @@ class Home extends React.Component {
       FilteredMovieList: [],
       SearchKeyword: "",
       Total_pages: 1,
+      Total_Results: "",
 
       Movie: {
         Title: "",
@@ -67,9 +68,14 @@ class Home extends React.Component {
     let response = await fetch(URL);
     let data = await response.json();
     let data1 = data.results;
-    let data2 = data.total_results;
+    let data2 = data.total_pages;
+    let data3 = data.total_results;
 
-    this.setState({ MovieList: data1, Total_pages: data2 });
+    this.setState({
+      MovieList: data1,
+      Total_pages: data2,
+      Total_Results: data3
+    });
   };
 
   componentDidMount() {
@@ -140,8 +146,8 @@ class Home extends React.Component {
           </div>
           <div className="row my-3 mx-auto">
             <Pagination
-              // totalItems={50}
-              // pageSize={3}
+              total_pages={this.Total_page}
+              total_results={this.Total_Results}
               onSelect={this.handleSelected}
               // maxPaginationNumbers={9}
               // activePage={2}
