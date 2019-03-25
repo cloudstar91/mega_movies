@@ -1,7 +1,7 @@
 import React from "react";
 
 import Filter from "./Filter";
-import SearchBar from "./SearchBar";
+import NavBar from "./NavBar";
 import MovieList from "./MovieList";
 import Pagination from "./Pagination";
 
@@ -77,6 +77,7 @@ class Home extends React.Component {
     let data1 = data.results;
     let data2 = data.total_pages;
     let data3 = data.total_results;
+    debugger;
     console.log(URL);
     this.setState({
       MovieList: data1,
@@ -123,35 +124,37 @@ class Home extends React.Component {
     const genList = this.state.GenreList.map(item => item.name);
     console.log("gen", genList);
 
-    const movies = this.state.MovieList.filter(item => {
-      const name = item.title || item.original_name || item.original_title;
-      return (
-        name &&
-        name.toLowerCase().indexOf(this.state.SearchKeyword.toLowerCase()) !==
-          -1
-      );
-    })
-      .filter(item => {
-        // debugger;
+    const movies = this.state.MovieList;
 
-        return (
-          parseInt(moment(item.release_date).format("YYYY")) <=
-            parseInt(this.state.MaxYear) &&
-          parseInt(moment(item.release_date).format("YYYY")) >
-            parseInt(this.state.MinYear)
-        );
-      })
-      .filter(item => {
-        return (
-          parseFloat(item.vote_average) <= this.state.MaxRate &&
-          parseFloat(item.vote_average) > this.state.MinRate
-        );
-      });
+    // const movies = this.state.MovieList.filter(item => {
+    //   const name = item.title || item.original_name || item.original_title;
+    //   return (
+    //     name &&
+    //     name.toLowerCase().indexOf(this.state.SearchKeyword.toLowerCase()) !==
+    //       -1
+    //   );
+    // })
+    //   .filter(item => {
+    //     // debugger;
+
+    //     return (
+    //       parseInt(moment(item.release_date).format("YYYY")) <=
+    //         parseInt(this.state.MaxYear) &&
+    //       parseInt(moment(item.release_date).format("YYYY")) >
+    //         parseInt(this.state.MinYear)
+    //     );
+    //   })
+    //   .filter(item => {
+    //     return (
+    //       parseFloat(item.vote_average) <= this.state.MaxRate &&
+    //       parseFloat(item.vote_average) > this.state.MinRate
+    //     );
+    //   });
 
     console.log(this.state.SearchKeyword);
     return (
       <div className="container text-center" style={{ maxWidth: "1400px" }}>
-        <SearchBar filter={this.filterBySearch} />
+        <NavBar />
 
         <div className="row my-3">
           <div className="col-3">
@@ -168,6 +171,7 @@ class Home extends React.Component {
               movies={movies}
               genre={this.state.GenreList}
               genName={genList}
+              filter={this.filterBySearch}
             />
           </div>
           <div className="col-9">

@@ -2,7 +2,7 @@ import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../index.css";
-
+import SearchBar from "./SearchBar";
 import InputRange from "react-input-range";
 
 import "react-input-range/lib/css/index.css";
@@ -36,7 +36,7 @@ class Filter extends React.Component {
         <InputRange
           draggableTrack
           maxValue={2019}
-          minValue={1990}
+          minValue={1980}
           onChange={this.props.filterYear}
           onChangeComplete={this.props.onYearChanged}
           value={this.props.valueOfYear}
@@ -50,6 +50,7 @@ class Filter extends React.Component {
           onChangeComplete={this.props.onRatingChanged}
           value={this.props.valueOfRate}
         />
+        <SearchBar searchBox={this.props.filter} />
       </div>
     );
   }
