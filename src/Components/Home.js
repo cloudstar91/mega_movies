@@ -29,7 +29,7 @@ class Home extends React.Component {
         ImgSrc: ""
       },
       yearValue: {
-        min: 1990,
+        min: 2000,
         max: 2019
       },
       ratingValue: {
@@ -43,13 +43,13 @@ class Home extends React.Component {
       MaxRate: 10,
       MinRate: 0,
       selectedPage: 1,
-      currentPage: 1
+      pages: { page1: 1, page2: 2, page3: 3, page4: 4, page5: 5 }
     };
 
     this.API_KEY = `daf966ec004a4c2e755a29fc1605e0cb`;
     this.page = 1;
   }
-  debugger;
+  // debugger;
 
   getGenreList = async () => {
     let GenURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${
@@ -63,27 +63,25 @@ class Home extends React.Component {
     //console.log(this.state.GenreList);
   };
 
-  getMovieList = async () => {
+  getMovieList = async nextPage => {
+    const selectedPage = this.state.selectedPage;
+    if (!nextPage) nextPage = selectedPage;
     console.log("a");
-    const URL = `https://api.themoviedb.org/3/discover/movie?&page=${
-      this.state.selectedPage
-    }&api_key=${this.API_KEY}&with_genres=${this.state.selectedGenre}&sort_by=${
-      this.state.sortBy
-    }`;
-
-    //
+    const URL = `https://api.themoviedb.org/3/discover/movie?&page=${nextPage}&api_key=${
+      this.API_KEY
+    }&with_genres=${this.state.selectedGenre}&sort_by=${this.state.sortBy}`;
 
     let response = await fetch(URL);
     let data = await response.json();
     let data1 = data.results;
     let data2 = data.total_pages;
     let data3 = data.total_results;
-    debugger;
     console.log(URL);
     this.setState({
       MovieList: data1,
       Total_pages: data2,
-      Total_Results: data3
+      Total_Results: data3,
+      selectedPage: nextPage
     });
   };
 
@@ -106,6 +104,54 @@ class Home extends React.Component {
     this.setState({ selectedPage: selectedPage });
     this.getMovieList();
   };
+  handleNextPage = e => {
+    e.preventDefault();
+    var currentPage = this.state.selectedPage;
+    var nextPage = currentPage + 1;
+    this.setState({ currentPage: nextPage });
+
+    this.getMovieList(nextPage);
+    //update pagination
+    this.updatePagination(currentPage, nextPage);
+  };
+  handleNextNextPage = e => {
+    e.preventDefault();
+    const pages = this.state.pages;
+    var currentPage = this.state.selectedPage;
+    var nextPage = currentPage + 5;
+    this.setState({ currentPage: nextPage });
+
+    this.getMovieList(nextPage);
+    //update pagination
+    this.setState({
+      pages: {
+        page1: pages.page1 + 5,
+        page2: pages.page2 + 5,
+        page3: pages.page3 + 5,
+        page4: pages.page4 + 5,
+        page5: pages.page5 + 5
+      }
+    });
+  };
+  handleGoToPage = e => {
+    e.preventDefault();
+    var previousPage = this.state.selectedPage;
+    var nextPage = parseInt(e.target.innerHTML);
+    this.getMovieList(nextPage);
+    previousPage = previousPage % 5 === 0 ? 5 : previousPage % 5;
+    nextPage = nextPage % 5 === 0 ? 5 : nextPage % 5;
+    //update pagination
+    this.updatePagination(previousPage, nextPage);
+  };
+  updatePagination(currentPage, nextPage) {
+    var ul = document.getElementById("pagination");
+    ul.querySelector(
+      "li:nth-child(" + (currentPage + 1) + ")"
+    ).classList.remove("active");
+    ul.querySelector("li:nth-child(" + (nextPage + 1) + ")").classList.add(
+      "active"
+    );
+  }
   handleYearChange = value => {
     this.setState({ yearValue: value });
   };
@@ -179,13 +225,61 @@ class Home extends React.Component {
             <MovieList movies={movies} genre={this.state.GenreList} />
           </div>
           <div className="row my-3 mx-auto">
-            <Pagination
+            <nav aria-label="...">
+              <ul id="pagination" class="pagination">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">
+                    Previous
+                  </a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="#" onClick={this.handleGoToPage}>
+                    {this.state.pages.page1}
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#" onClick={this.handleGoToPage}>
+                    {this.state.pages.page2}
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#" onClick={this.handleGoToPage}>
+                    {this.state.pages.page3}
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#" onClick={this.handleGoToPage}>
+                    {this.state.pages.page4}
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#" onClick={this.handleGoToPage}>
+                    {this.state.pages.page5}
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#" onClick={this.handleNextPage}>
+                    Next
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="#"
+                    onClick={this.handleNextNextPage}
+                  >
+                    Next Next
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            {/* <Pagination
               total_pages={this.Total_page}
               total_results={this.Total_Results}
               onSelect={this.handleSelected}
               // maxPaginationNumbers={9}
               // activePage={2}
-            />
+            /> */}
           </div>
         </div>
       </div>
