@@ -39,7 +39,7 @@ class Home extends React.Component {
 
       GenreList: [],
       MaxYear: 2019,
-      MinYear: 2000,
+      MinYear: 1990,
       MaxRate: 10,
       MinRate: 0,
       selectedPage: 1,
