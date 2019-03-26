@@ -19,6 +19,7 @@ class Home extends React.Component {
       Total_pages: 1,
       Total_Results: "",
       selectedGenre: "",
+      sortBy: "release_date.desc",
       // genreValue: "",
 
       Movie: {
@@ -29,7 +30,7 @@ class Home extends React.Component {
         ImgSrc: ""
       },
       yearValue: {
-        min: 1990,
+        min: 1900,
         max: 2019
       },
       ratingValue: {
@@ -39,7 +40,7 @@ class Home extends React.Component {
 
       GenreList: [],
       MaxYear: 2019,
-      MinYear: 1990,
+      MinYear: 1900,
       MaxRate: 10,
       MinRate: 0,
       selectedPage: 1,
@@ -69,7 +70,7 @@ class Home extends React.Component {
     console.log("a");
     const URL = `https://api.themoviedb.org/3/discover/movie?&page=${nextPage}&api_key=${
       this.API_KEY
-    }&with_genres=${this.state.selectedGenre}&sort_by=${this.state.sortBy}`;
+    }&with_genres=${this.state.selectedGenre}&sort_by=popularity.desc`;
 
     let response = await fetch(URL);
     let data = await response.json();
@@ -187,14 +188,14 @@ class Home extends React.Component {
         return (
           parseInt(moment(item.release_date).format("YYYY")) <=
             parseInt(this.state.MaxYear) &&
-          parseInt(moment(item.release_date).format("YYYY")) >
+          parseInt(moment(item.release_date).format("YYYY")) >=
             parseInt(this.state.MinYear)
         );
       })
       .filter(item => {
         return (
           parseFloat(item.vote_average) <= this.state.MaxRate &&
-          parseFloat(item.vote_average) > this.state.MinRate
+          parseFloat(item.vote_average) >= this.state.MinRate
         );
       });
 
