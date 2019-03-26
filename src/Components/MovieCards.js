@@ -8,7 +8,7 @@ import "react-input-range/lib/css/index.css";
 class MovieCards extends React.Component {
   render() {
     return (
-      <div className="col-4">
+      <div className="col-lg-4 col-xs-12">
         <div className="card-deck">
           <div className="card mb-3">
             <img

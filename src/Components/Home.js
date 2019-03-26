@@ -29,7 +29,7 @@ class Home extends React.Component {
         ImgSrc: ""
       },
       yearValue: {
-        min: 2000,
+        min: 1990,
         max: 2019
       },
       ratingValue: {
