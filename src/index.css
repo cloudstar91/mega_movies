@@ -141,3 +141,13 @@ code {
 .btn-position {
   margin-bottom: 10px;
 }
+.imgoverlay {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.container-fluid {
+  position: relative !important;
+  text-align: center !important;
+}

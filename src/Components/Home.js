@@ -3,6 +3,7 @@ import React from "react";
 import Filter from "./Filter";
 import NavBar from "./NavBar";
 import MovieList from "./MovieList";
+import TrendingDisplay from "./TrendingDisplay";
 import Pagination from "./Pagination";
 
 // import "./index.css";
@@ -203,6 +204,8 @@ class Home extends React.Component {
     return (
       <div className="container text-center" style={{ maxWidth: "1400px" }}>
         <NavBar />
+
+        <TrendingDisplay movies={movies} genre={this.state.GenreList} />
 
         <div className="row my-3">
           <div className="col-3">

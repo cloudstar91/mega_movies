@@ -56,31 +56,33 @@ class MovieList extends React.Component {
   render() {
     let genreList = this.props.genre;
     // let movies = this.props.movies;
-    debugger;
-    return (
-      <div className="row">
-        {this.props.movies.map(item => {
-          // let momentObj = moment(item.release_date).format("YYYY-MM-DD");
-          // momentObj = moment().year();
-          return (
-            <MovieCards
-              genre={this.vlookupGenre(genreList, item.genre_ids)}
-              name={item.title || item.original_name || item.original_title}
-              release={parseInt(moment(item.release_date).format("YYYY"))}
-              poster={item.poster_path}
-              rating={item.vote_average}
-              overview={item.overview.slice(0, 150) + "..."}
-              id={item.id}
-              handleOpenModal={this.handleOpenModal}
-            />
-          );
-        })}
 
-        <TrailerModal
-          showModal={this.state.showModal}
-          handleCloseModal={this.handleCloseModal}
-          youtubeKey={this.state.youtubeKey}
-        />
+    return (
+      <div>
+        <div className="row">
+          {this.props.movies.map(item => {
+            // let momentObj = moment(item.release_date).format("YYYY-MM-DD");
+            // momentObj = moment().year();
+            return (
+              <MovieCards
+                genre={this.vlookupGenre(genreList, item.genre_ids)}
+                name={item.title || item.original_name || item.original_title}
+                release={parseInt(moment(item.release_date).format("YYYY"))}
+                poster={item.poster_path}
+                rating={item.vote_average}
+                overview={item.overview.slice(0, 150) + "..."}
+                id={item.id}
+                handleOpenModal={this.handleOpenModal}
+              />
+            );
+          })}
+
+          <TrailerModal
+            showModal={this.state.showModal}
+            handleCloseModal={this.handleCloseModal}
+            youtubeKey={this.state.youtubeKey}
+          />
+        </div>
       </div>
     );
   }
