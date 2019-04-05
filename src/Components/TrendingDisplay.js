@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../index.css";
 
 import "react-input-range/lib/css/index.css";
-import TrailerModal from "./TrailerModal";
+
 class TrendingDisplay extends React.Component {
   render() {
     console.log(this.props.movies[0]);
@@ -30,11 +30,6 @@ class TrendingDisplay extends React.Component {
             </div>
           </div>
         )}
-        <TrailerModal
-          showModal={this.state.showModal}
-          handleCloseModal={this.handleCloseModal}
-          youtubeKey={this.state.youtubeKey}
-        />
       </div>
     );
   }
