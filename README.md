@@ -4,16 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Created with love by: `Huong-Kim`
   
-View online at: https://h-react-megamovie.netlify.com
+View online at: https://mega-movies-project.netlify.com/
   
 A site of now-playing and top-rated movies. Up-to-date using [The Movie DB API](https://developers.themoviedb.org)
 
 # Challenge 
-* Not easy to have a clear flow at the beginning for a beginner, easy to endup with a mess of small components. 
-* Many will-know-in-future tools. Now using very basic tools so get to know that how usefull those in-the-future-tools will be.
-* Bootstrap is suck in react. there are many packages (**Pagination, slider,etc...**) available, but the available ones are sometimes ugly @.@. Although many packages, libaries are provied but they are inconsistent as a whole.  Reactstrap is still limited. 
-* Overall, It is a very usefull work to do, that covers up almost main concepts of react.
-
+* frustrated at the first time working with API
+* doing pagination without using library is really difficutl to me
+* styling is also not very easy
 ## User Stories
 
 * [x] The following **required** functionalities are completed (this is a sample):
@@ -33,18 +31,18 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 * [x] Sort by Genres
-* [ ] Rolling up & down button
+* [x] Rolling up & down button
 * [ ] Add style to make the page looks fancy
-* [ ] Use API to make the searchs (release date, year...)
+* [x] Use API to make the searchs (release date, year...)
 
 ## Time Spent and Lessons Learned
 
-Time spent: **10 hours** spent in total.
+Time spent: at least **10 hours** spent in total.
 
 
 ## License
 
-    Copyright [2019] [Huong]
+    Copyright [2019] 
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
